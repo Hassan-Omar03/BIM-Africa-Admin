@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useContext, useRef } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import AppContext from "../context/AppContext";
+import MDEditor from "@uiw/react-md-editor";
+
 
 export default function AddBlog() {
   const { addBlog, updateBlog, getBlogById } = useContext(AppContext);
@@ -287,32 +289,43 @@ export default function AddBlog() {
               placeholder="Enter blog title"
             />
           </div>
+<div>
+  <label className="block text-gray-700 font-medium mb-2">Description *</label>
 
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">Description *</label>
-            <textarea
-              name="desc"
-              value={formData.desc}
-              onChange={handleChange}
-              required
-              rows="4"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-              placeholder="Enter blog description"
-            />
-          </div>
+  <div
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+  >
+    <MDEditor
+      value={formData.desc}                     // ✔ your value
+      onChange={(val) =>
+        handleChange({ target: { name: "desc", value: val || "" } })
+      }                                         // ✔ your onchange pattern
+      placeholder="Enter blog description"      // ✔ your placeholder
+      required                                  // ✔ your required
+      rows={4}                                  // ✔ your rows
+      className="w-full"                        // ✔ inside same styling
+    />
+  </div>
+</div>
 
-          <div>
-            <label className="block text-gray-700 font-medium mb-2">Extra Description *</label>
-            <textarea
-              name="extraDesc"
-              value={formData.extraDesc}
-              onChange={handleChange}
-              required
-              rows="6"
-              className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
-              placeholder="Enter additional details"
-            />
-          </div>
+<div>
+  <label className="block text-gray-700 font-medium mb-2">Extra Description *</label>
+
+  <div
+    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-600"
+  >
+    <MDEditor
+      value={formData.extraDesc}                // ✔ same value
+      onChange={(val) =>
+        handleChange({ target: { name: "extraDesc", value: val || "" } })
+      }                                         // ✔ same onchange
+      placeholder="Enter additional details"    // ✔ same placeholder
+      required                                  // ✔ same required
+      rows={6}                                  // ✔ same rows
+      className="w-full"
+    />
+  </div>
+</div>
 
           <div>
             <label className="block text-gray-700 font-medium mb-2">Author *</label>
